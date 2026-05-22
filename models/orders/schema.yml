@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: bigquery_source
+    database: gentle-coyote-497118-d7
+    schema: staging
+
+    tables:
+      - name: orders   
+
+models:
+    - name: fct_orders
+      description: "DBT transformation of orders"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
+      config:
+        materialized: table
+        alias: orders_reports
